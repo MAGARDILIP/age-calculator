@@ -73,8 +73,8 @@ const ProfilesDashboard = () => {
           onChange={(e) => setZodiacFilter(e.target.value)}
           style={{ width: 'auto', backgroundColor: 'var(--card-bg)', color: 'var(--text-color)' }}
         >
-          <option value="">All Zodiac Signs</option>
-          {zodiacSigns.map(sign => <option key={sign} value={sign}>{sign}</option>)}
+          <option value="" style={{ color: '#000' }}>All Zodiac Signs</option>
+          {zodiacSigns.map(sign => <option key={sign} value={sign} style={{ color: '#000' }}>{sign}</option>)}
         </select>
       </div>
 

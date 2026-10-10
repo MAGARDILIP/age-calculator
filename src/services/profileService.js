@@ -1,41 +1,46 @@
-const API_URL = "http://localhost:5000/profiles";
+const STORAGE_KEY = "age_calculator_profiles";
+
+const getStorageProfiles = () => {
+  const data = localStorage.getItem(STORAGE_KEY);
+  return data ? JSON.parse(data) : [];
+};
+
+const saveStorageProfiles = (profiles) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
+};
 
 export const getProfiles = async () => {
-  const response = await fetch(API_URL);
-  if (!response.ok) throw new Error("Failed to fetch profiles");
-  return response.json();
+  return Promise.resolve(getStorageProfiles());
 };
 
 export const getProfileById = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`);
-  if (!response.ok) throw new Error("Failed to fetch profile");
-  return response.json();
+  const profiles = getStorageProfiles();
+  const profile = profiles.find(p => p.id === id || p.id === String(id));
+  if (!profile) throw new Error("Failed to fetch profile");
+  return Promise.resolve(profile);
 };
 
 export const createProfile = async (profileData) => {
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(profileData),
-  });
-  if (!response.ok) throw new Error("Failed to create profile");
-  return response.json();
+  const profiles = getStorageProfiles();
+  const newProfile = { ...profileData, id: Date.now().toString() };
+  profiles.push(newProfile);
+  saveStorageProfiles(profiles);
+  return Promise.resolve(newProfile);
 };
 
 export const updateProfile = async (id, profileData) => {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(profileData),
-  });
-  if (!response.ok) throw new Error("Failed to update profile");
-  return response.json();
+  const profiles = getStorageProfiles();
+  const index = profiles.findIndex(p => p.id === id || p.id === String(id));
+  if (index === -1) throw new Error("Failed to update profile");
+  
+  profiles[index] = { ...profileData, id };
+  saveStorageProfiles(profiles);
+  return Promise.resolve(profiles[index]);
 };
 
 export const deleteProfile = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
-  });
-  if (!response.ok) throw new Error("Failed to delete profile");
-  return response.json();
+  let profiles = getStorageProfiles();
+  profiles = profiles.filter(p => p.id !== id && p.id !== String(id));
+  saveStorageProfiles(profiles);
+  return Promise.resolve({ success: true });
 };
