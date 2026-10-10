@@ -10,18 +10,18 @@ This project was built for the Advanced Web Technologies (AWT) course - Formativ
 - **Accurate Age Calculation**: Calculates age in years, months, and days.
 - **Detailed Breakdown**: See your age in total months, weeks, days, hours, and minutes.
 - **Birthday Countdown**: Find out exactly how many days are left until your next birthday.
-- **Historical Fun Facts**: Integrates with external APIs to fetch historical events that happened in your birth year.
-- **Profile Management (CRUD)**: Save profiles of your friends and family with their birth dates to a local JSON server.
+- **Historical Fun Facts**: Integrates with the Wikipedia REST API to fetch historical events that happened in your birth year.
+- **Profile Management (CRUD)**: Save profiles of your friends and family with their birth dates directly to your browser's **Local Storage** (Serverless architecture).
 - **Search & Filter**: Search saved profiles by name, or filter them by Zodiac sign.
 - **Responsive Design**: Modern, glassmorphism UI that works beautifully across all devices.
-- **Dark/Light Theme**: Built-in theme toggling context.
+- **Dark/Light Theme**: Built-in theme toggling context with CSS variable inheritance.
 
 ## Tech Stack
 - React.js (v19)
 - React Router DOM for routing
 - Vite (Build Tool)
 - Vitest (Testing)
-- JSON Server (Mock Backend API)
+- Browser LocalStorage API (Data Persistence)
 
 ## Getting Started
 
@@ -43,7 +43,7 @@ Make sure you have Node.js installed on your machine.
    ```
 
 ### Running Locally
-To run both the Vite frontend and the JSON Server backend simultaneously:
+To run the Vite frontend:
 ```bash
 npm run dev
 ```
@@ -59,4 +59,4 @@ npm run test
 This project is successfully deployed on **Vercel**. 
 - **Live URL:** [https://age-calculator-ivory-gamma.vercel.app/](https://age-calculator-ivory-gamma.vercel.app/)
 - A `vercel.json` is included to handle React Router client-side routing.
-- *Note: Since Vercel uses a serverless environment, the `json-server` backend operates in read-only mode in production.*
+- *Note: Since the application uses LocalStorage for data persistence, it functions entirely as a static Single Page Application (SPA) without requiring any backend.*
