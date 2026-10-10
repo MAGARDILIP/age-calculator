@@ -46,7 +46,7 @@ function FunFacts({ facts, birthYear }) {
       </div>
 
       {/* API Integration Section */}
-      <div className="fun-facts__api-section" style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+      <div className="fun-facts__api-section" style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid var(--border-color)' }}>
         <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Historical Fact ({birthYear})</h3>
         {loading && <p style={{ fontSize: '0.9rem', color: '#888' }}>Loading fact from Numbers API...</p>}
         {error && <p style={{ fontSize: '0.9rem', color: '#ff6b6b' }}>{error}</p>}
