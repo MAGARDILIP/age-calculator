@@ -1,5 +1,7 @@
 # Age Calculator
 
+🌍 **Live Demo:** [https://age-calculator-ivory-gamma.vercel.app/](https://age-calculator-ivory-gamma.vercel.app/)
+
 An advanced web application to calculate exact age, detailed breakdowns, next birthday countdowns, and discover fun historical facts about your birth year.
 
 This project was built for the Advanced Web Technologies (AWT) course - Formative Assessment Phase I & II.
@@ -54,6 +56,7 @@ npm run test
 ```
 
 ## Deployment
-This project is configured to be deployed on **Vercel**. 
+This project is successfully deployed on **Vercel**. 
+- **Live URL:** [https://age-calculator-ivory-gamma.vercel.app/](https://age-calculator-ivory-gamma.vercel.app/)
 - A `vercel.json` is included to handle React Router client-side routing.
-- *Note: Since Vercel uses a serverless environment, the `json-server` backend will be read-only if deployed there.*
+- *Note: Since Vercel uses a serverless environment, the `json-server` backend operates in read-only mode in production.*
