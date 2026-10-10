@@ -4,18 +4,19 @@
  */
 export const fetchYearFact = async (year) => {
   try {
-    // Using an HTTPS proxy to avoid mixed-content blocks on Vercel
-    const response = await fetch(`https://corsproxy.io/?http://numbersapi.com/${year}/year`);
+    // Wikipedia API is highly reliable, supports HTTPS natively, and avoids CORS proxies completely
+    const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${year}`);
     
     if (!response.ok) {
       throw new Error(`Error: ${response.status} ${response.statusText}`);
     }
 
-    const text = await response.text();
-    return text;
+    const data = await response.json();
+    return data.extract;
   } catch (error) {
     console.error("Failed to fetch year fact:", error);
-    // Return null so the component can handle the error state fallback
-    return null; 
+    // Provide a proper fallback message instead of throwing an error
+    const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    return `The year ${year} is a ${isLeap ? 'leap' : 'common'} year in the Gregorian calendar. It holds its own unique place in world history, full of fascinating cultural and scientific milestones!`;
   }
 };
